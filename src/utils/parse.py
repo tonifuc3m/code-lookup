@@ -10,6 +10,7 @@ import os
 import pandas as pd
 import string
 
+
 def parse_ann(datapath, labels_to_ignore = [], with_notes=False):
     '''
     DESCRIPTION: parse information in .ann files.
@@ -85,14 +86,11 @@ def parse_one_ann(info, filenames, root, filename, labels_to_ignore,
         label_offset = splitted[1].split(' ')
         label = label_offset[0]
         # Only store labels I am interested in
-        if label in labels_to_ignore:
-            continue
         offset = label_offset[1:]
-        span = splitted[2].strip()
+        span = splitted[2].strip('\n')
         if with_notes==False:
             info.append([annotator, bunch, filename,mark, label,
-                         offset[0], offset[-1], 
-                         span.strip(string.punctuation)])
+                         offset[0], offset[-1], span])
             continue
         
         if mark in mark2code.keys():
@@ -100,8 +98,7 @@ def parse_one_ann(info, filenames, root, filename, labels_to_ignore,
         else:
             code = ''
         info.append([annotator, bunch, filename,mark, label,
-                     offset[0], offset[-1], 
-                     span.strip(string.punctuation), code])
+                     offset[0], offset[-1], span, code])
             
     return info
 

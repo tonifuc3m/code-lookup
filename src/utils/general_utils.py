@@ -54,7 +54,7 @@ def write_ann(filename, df_annots, outpath):
         span = df_this.loc[idx,'span']
         code = df_this.loc[idx,'code']
         f.write(mark + '\t' + label + ' ' + off0 + ' ' + off1 + '\t' + span + '\n')
-        f.write('#' + mark[1:] + 'AnnotatorNotes' + ' ' + mark + '\t' + code + '\n')
+        f.write('#' + mark[1:] + '\t' + 'AnnotatorNotes' + ' ' + mark + '\t' + code + '\n')
         
     f.close()
     
